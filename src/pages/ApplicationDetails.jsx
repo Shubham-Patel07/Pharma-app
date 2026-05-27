@@ -10,6 +10,8 @@ import { TabBar } from '../components/ui/TabBar'
 import { DocumentUpload } from '../components/ui/DocumentUpload'
 import { ApplicationTimeline } from '../components/ui/ApplicationTimeline'
 import { MOCK_APPLICATIONS, DOCUMENT_CHECKLIST } from '../data/mockData'
+import { useDocumentProgress } from '../hooks/useDocumentProgress'
+import { getMissingRequiredDocs } from '../hooks/documentHelpers'
 
 export function ApplicationDetails() {
   const { id } = useParams()
@@ -31,11 +33,7 @@ export function ApplicationDetails() {
     )
   }
 
-  const totalRequired = DOCUMENT_CHECKLIST.filter((d) => d.required).length
-  const uploadedRequired = DOCUMENT_CHECKLIST.filter((d) => d.required).filter(
-    (d) => app.documents.find((ud) => ud.docId === d.id)?.uploaded
-  ).length
-  const totalUploaded = app.documents.filter((d) => d.uploaded).length
+  const { totalRequired, uploadedRequired, totalUploaded } = useDocumentProgress(app)
 
   const TABS = [
     { id: 'overview', label: 'Overview' },
@@ -132,18 +130,13 @@ function OverviewTab({ app, totalRequired, uploadedRequired, totalUploaded }) {
             <h2 className="card-heading">Next Steps</h2>
           </CardHeader>
           <CardBody className="space-y-2.5">
-            {DOCUMENT_CHECKLIST.filter((d) => d.required)
-              .filter((d) => !app.documents.find((ud) => ud.docId === d.id)?.uploaded)
-              .slice(0, 4)
-              .map((doc) => (
-                <div key={doc.id} className="flex items-start gap-2 text-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                  <span className="text-slate-600">Upload {doc.name}</span>
-                </div>
-              ))}
-            {DOCUMENT_CHECKLIST.filter((d) => d.required).filter(
-              (d) => !app.documents.find((ud) => ud.docId === d.id)?.uploaded
-            ).length === 0 && (
+            {getMissingRequiredDocs(app.documents).slice(0, 4).map((doc) => (
+              <div key={doc.id} className="flex items-start gap-2 text-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                <span className="text-slate-600">Upload {doc.name}</span>
+              </div>
+            ))}
+            {getMissingRequiredDocs(app.documents).length === 0 && (
               <p className="text-sm text-emerald-600 font-medium">All required documents uploaded!</p>
             )}
           </CardBody>
@@ -176,4 +169,3 @@ function ProgressItem({ label, value, color }) {
     </div>
   )
 }
-

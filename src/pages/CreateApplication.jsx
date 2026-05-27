@@ -1,39 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TopBar } from '../components/layout/TopBar'
 import { Button } from '../components/ui/Button'
 import { Card, CardHeader, CardBody } from '../components/ui/Card'
 import { FormField, Input, Select } from '../components/ui/FormField'
 import { DOSAGE_FORMS } from '../data/mockData'
-import { INITIAL_FORM, REQUIRED_FIELDS } from '../data/formData'
 import { CheckIcon } from '../components/icons/CheckIcon'
-import { InfoIcon } from '../components/icons/InfoIcon'
+import { InfoBanner } from '../components/ui/InfoBanner'
+import { useApplicationForm } from '../hooks/useApplicationForm'
 
 export function CreateApplication() {
   const navigate = useNavigate()
-  const [form, setForm] = useState(INITIAL_FORM)
-  const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-
-  const set = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
-
-  function validate() {
-    const errs = {}
-    REQUIRED_FIELDS.forEach((f) => {
-      if (!form[f].trim()) errs[f] = 'This field is required'
-    })
-    return errs
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    const errs = validate()
-    if (Object.keys(errs).length) {
-      setErrors(errs)
-      return
-    }
-    setSubmitted(true)
-  }
+  const { form, errors, submitted, set, handleSubmit, reset } = useApplicationForm()
 
   if (submitted) {
     return (
@@ -50,7 +28,7 @@ export function CreateApplication() {
               Begin uploading required documents to improve your readiness score.
             </p>
             <div className="flex gap-3 justify-center">
-              <Button variant="secondary" onClick={() => { setForm(INITIAL_FORM); setSubmitted(false); setErrors({}) }}>
+              <Button variant="secondary" onClick={reset}>
                 Create Another
               </Button>
               <Button onClick={() => navigate('/applications')}>
@@ -173,11 +151,9 @@ export function CreateApplication() {
               </CardBody>
             </Card>
 
-            {/* Info banner */}
-            <div className="flex gap-3 px-4 py-3.5 bg-brand-50 border border-brand-200 rounded-lg text-sm text-brand-700">
-              <InfoIcon className="w-5 h-5 shrink-0 mt-0.5" />
-              <p>After creation, you'll be taken to the application page where you can upload required documents and track your readiness score.</p>
-            </div>
+            <InfoBanner>
+              After creation, you'll be taken to the application page where you can upload required documents and track your readiness score.
+            </InfoBanner>
 
             <div className="flex gap-3 pt-2">
               <Button type="submit" size="lg">

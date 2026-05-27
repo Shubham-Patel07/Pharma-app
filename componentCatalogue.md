@@ -142,6 +142,21 @@ Accepts a `documents` prop: the `documents` array from an application object.
 
 ---
 
+### `QuickAction`
+**Location:** `src/components/ui/QuickAction.jsx`
+
+Clickable card tile used in the Dashboard "Quick Actions" grid. Renders a colored icon badge on the left and a title + description on the right.
+
+| Prop | Type | Description |
+|---|---|---|
+| `icon` | `ReactNode` | Icon element (e.g. `<PlusIcon className="w-5 h-5" />`) |
+| `title` | `string` | Bold action label |
+| `desc` | `string` | Subdued description line |
+| `color` | `string` | Tailwind classes for the icon badge background and text color |
+| `onClick` | `function` | Click handler |
+
+---
+
 ### `TabBar`
 **Location:** `src/components/ui/TabBar.jsx`
 
@@ -193,10 +208,20 @@ Filter options are sourced from `STATUS_LABELS` in `mockData.js`. The search ico
 
 Each icon lives in its own file under `src/components/icons/`. Import directly from the file — there is no barrel `index.jsx`.
 
+### `ChartIcon`
+**Location:** `src/components/icons/ChartIcon.jsx`
+
+Bar chart symbol. Used in the `Dashboard` Quick Actions tile for "Review Analytics".
+
 ### `CheckIcon`
 **Location:** `src/components/icons/CheckIcon.jsx`
 
 Checkmark (tick). Used in `CreateApplication` success state and `DocumentChecklist` uploaded-document indicator.
+
+### `FolderIcon`
+**Location:** `src/components/icons/FolderIcon.jsx`
+
+Folder symbol. Used in the `Dashboard` Quick Actions tile for "Upload Documents".
 
 ### `InfoIcon`
 **Location:** `src/components/icons/InfoIcon.jsx`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PlusIcon } from '../components/icons/PlusIcon'
 import { SearchIcon } from '../components/icons/SearchIcon'
@@ -7,19 +7,11 @@ import { Button } from '../components/ui/Button'
 import { ApplicationCard } from '../components/ui/ApplicationCard'
 import { SearchFilter } from '../components/ui/SearchFilter'
 import { MOCK_APPLICATIONS } from '../data/mockData'
+import { useFilteredApplications } from '../hooks/useFilteredApplications'
 
 export function Applications() {
   const navigate = useNavigate()
-  const [filter, setFilter] = useState('all')
-  const [search, setSearch] = useState('')
-
-  const filtered = MOCK_APPLICATIONS.filter((app) => {
-    const matchesStatus = filter === 'all' || app.status === filter
-    const matchesSearch =
-      app.productName.toLowerCase().includes(search.toLowerCase()) ||
-      app.manufacturerName.toLowerCase().includes(search.toLowerCase())
-    return matchesStatus && matchesSearch
-  })
+  const { search, setSearch, filter, setFilter, filtered } = useFilteredApplications()
 
   return (
     <div className="page-wrapper">

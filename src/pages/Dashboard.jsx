@@ -1,10 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PlusIcon } from '../components/icons/PlusIcon'
+import { FolderIcon } from '../components/icons/FolderIcon'
+import { ChartIcon } from '../components/icons/ChartIcon'
 import { TopBar } from '../components/layout/TopBar'
 import { Button } from '../components/ui/Button'
 import { StatCard } from '../components/ui/StatCard'
 import { ApplicationCard } from '../components/ui/ApplicationCard'
+import { QuickAction } from '../components/ui/QuickAction'
 import { MOCK_APPLICATIONS, STATS } from '../data/mockData'
 
 export function Dashboard() {
@@ -79,38 +82,5 @@ export function Dashboard() {
         </div>
       </main>
     </div>
-  )
-}
-
-function QuickAction({ icon, title, desc, color, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="card px-5 py-4 text-left hover:shadow-md hover:border-brand-200 transition-all flex items-start gap-4"
-    >
-      <div className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center shrink-0`}>
-        {icon}
-      </div>
-      <div>
-        <p className="font-semibold text-slate-800 text-sm">{title}</p>
-        <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
-      </div>
-    </button>
-  )
-}
-
-function FolderIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-    </svg>
-  )
-}
-
-function ChartIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-    </svg>
   )
 }
