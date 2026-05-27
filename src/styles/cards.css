@@ -1,0 +1,11 @@
+@layer components {
+  /* Base card surface — used by Card and StatCard */
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+  }
+
+  /* Clickable card with hover elevation */
+  .card-interactive {
+    @apply card cursor-pointer hover:shadow-md hover:border-brand-200 transition-all duration-200;
+  }
+}

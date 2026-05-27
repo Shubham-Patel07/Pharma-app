@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PlusIcon } from '../components/icons/PlusIcon'
 import { TopBar } from '../components/layout/TopBar'
 import { Button } from '../components/ui/Button'
 import { StatCard } from '../components/ui/StatCard'
@@ -11,7 +12,7 @@ export function Dashboard() {
   const recent = MOCK_APPLICATIONS.slice(0, 4)
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="page-wrapper">
       <TopBar
         title="Dashboard"
         subtitle="Welcome back, Shubham — here's a snapshot of your pipeline."
@@ -22,7 +23,7 @@ export function Dashboard() {
           </Button>
         }
       />
-      <main className="flex-1 px-8 py-8 space-y-8">
+      <main className="page-content space-y-8">
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard label="Total Applications" value={STATS.totalApplications} sub="All time" />
@@ -34,7 +35,7 @@ export function Dashboard() {
         {/* Recent Applications */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold text-slate-800">Recent Applications</h2>
+            <h2 className="section-heading">Recent Applications</h2>
             <button
               onClick={() => navigate('/applications')}
               className="text-sm text-brand-600 hover:text-brand-700 font-medium"
@@ -51,7 +52,7 @@ export function Dashboard() {
 
         {/* Quick actions */}
         <div>
-          <h2 className="text-base font-semibold text-slate-800 mb-4">Quick Actions</h2>
+          <h2 className="section-heading mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <QuickAction
               icon={<PlusIcon className="w-5 h-5" />}
@@ -85,7 +86,7 @@ function QuickAction({ icon, title, desc, color, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 text-left hover:shadow-md hover:border-brand-200 transition-all flex items-start gap-4"
+      className="card px-5 py-4 text-left hover:shadow-md hover:border-brand-200 transition-all flex items-start gap-4"
     >
       <div className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center shrink-0`}>
         {icon}
@@ -95,14 +96,6 @@ function QuickAction({ icon, title, desc, color, onClick }) {
         <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
       </div>
     </button>
-  )
-}
-
-function PlusIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
   )
 }
 

@@ -47,7 +47,7 @@ export function CreateApplication() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col flex-1">
+      <div className="page-wrapper">
         <TopBar title="Create Application" />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center max-w-sm">
@@ -74,7 +74,7 @@ export function CreateApplication() {
   }
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="page-wrapper">
       <TopBar
         title="New Application"
         subtitle="Fill in the product details to start a regulatory filing"
@@ -84,13 +84,13 @@ export function CreateApplication() {
           </Button>
         }
       />
-      <main className="flex-1 px-8 py-8">
+      <main className="page-content">
         <form onSubmit={handleSubmit} noValidate>
           <div className="max-w-2xl space-y-6">
             {/* Product Information */}
             <Card>
               <CardHeader>
-                <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Product Information</h2>
+                <h2 className="card-heading">Product Information</h2>
               </CardHeader>
               <CardBody className="space-y-5">
                 <FormField label="Product Name" required error={errors.productName}>
@@ -147,7 +147,7 @@ export function CreateApplication() {
             {/* Manufacturing */}
             <Card>
               <CardHeader>
-                <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Manufacturing & Regulatory</h2>
+                <h2 className="card-heading">Manufacturing & Regulatory</h2>
               </CardHeader>
               <CardBody className="space-y-5">
                 <FormField label="Manufacturer Name" required error={errors.manufacturerName}>

@@ -17,7 +17,7 @@ export function Input({ className = '', ...props }) {
   return (
     <input
       {...props}
-      className={`w-full px-3 py-2 rounded-lg border border-slate-300 text-sm text-slate-800 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-colors ${className}`}
+      className={`form-control placeholder-slate-400 ${className}`}
     />
   )
 }
@@ -26,7 +26,7 @@ export function Select({ children, className = '', ...props }) {
   return (
     <select
       {...props}
-      className={`w-full px-3 py-2 rounded-lg border border-slate-300 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-colors ${className}`}
+      className={`form-control ${className}`}
     >
       {children}
     </select>

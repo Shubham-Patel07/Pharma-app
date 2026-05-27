@@ -1,0 +1,11 @@
+@layer components {
+  /* Section headings inside page content (e.g. "Recent Applications") */
+  .section-heading {
+    @apply text-base font-semibold text-slate-800;
+  }
+
+  /* Card / panel headings in CardHeader (uppercase label style) */
+  .card-heading {
+    @apply text-sm font-semibold text-slate-700 uppercase tracking-wide;
+  }
+}

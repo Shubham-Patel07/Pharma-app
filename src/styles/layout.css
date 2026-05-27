@@ -1,0 +1,16 @@
+@layer components {
+  /* Root wrapper used on every page */
+  .page-wrapper {
+    @apply flex flex-col flex-1;
+  }
+
+  /* Main content area — standard padding */
+  .page-content {
+    @apply flex-1 px-8 py-8;
+  }
+
+  /* Slightly tighter top padding variant (Applications, Details) */
+  .page-content-sm {
+    @apply flex-1 px-8 py-6;
+  }
+}

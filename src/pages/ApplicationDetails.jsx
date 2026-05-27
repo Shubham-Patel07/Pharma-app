@@ -16,7 +16,7 @@ export function ApplicationDetails() {
 
   if (!app) {
     return (
-      <div className="flex flex-col flex-1">
+      <div className="page-wrapper">
         <TopBar title="Application Not Found" />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
@@ -41,7 +41,7 @@ export function ApplicationDetails() {
   ]
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="page-wrapper">
       <TopBar
         title={app.productName}
         subtitle={`${app.submissionType} · ${app.targetMarket}`}
@@ -75,16 +75,12 @@ export function ApplicationDetails() {
         </div>
       </div>
 
-      <main className="flex-1 px-8 py-6">
+      <main className="page-content-sm">
         {activeTab === 'overview' && (
           <OverviewTab app={app} totalRequired={totalRequired} uploadedRequired={uploadedRequired} totalUploaded={totalUploaded} />
         )}
-        {activeTab === 'documents' && (
-          <DocumentsTab app={app} />
-        )}
-        {activeTab === 'timeline' && (
-          <TimelineTab app={app} />
-        )}
+        {activeTab === 'documents' && <DocumentsTab app={app} />}
+        {activeTab === 'timeline' && <TimelineTab app={app} />}
       </main>
     </div>
   )
@@ -93,11 +89,10 @@ export function ApplicationDetails() {
 function OverviewTab({ app, totalRequired, uploadedRequired, totalUploaded }) {
   return (
     <div className="grid grid-cols-3 gap-6">
-      {/* Left: product summary */}
       <div className="col-span-2 space-y-5">
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Product Summary</h2>
+            <h2 className="card-heading">Product Summary</h2>
           </CardHeader>
           <CardBody>
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -115,10 +110,9 @@ function OverviewTab({ app, totalRequired, uploadedRequired, totalUploaded }) {
           </CardBody>
         </Card>
 
-        {/* Document progress */}
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Document Progress</h2>
+            <h2 className="card-heading">Document Progress</h2>
           </CardHeader>
           <CardBody className="space-y-4">
             <div className="flex items-center gap-6">
@@ -130,7 +124,6 @@ function OverviewTab({ app, totalRequired, uploadedRequired, totalUploaded }) {
         </Card>
       </div>
 
-      {/* Right: readiness */}
       <div className="space-y-5">
         <Card>
           <CardBody className="flex flex-col items-center py-8 gap-4">
@@ -150,17 +143,18 @@ function OverviewTab({ app, totalRequired, uploadedRequired, totalUploaded }) {
 
         <Card>
           <CardHeader>
-            <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Next Steps</h2>
+            <h2 className="card-heading">Next Steps</h2>
           </CardHeader>
           <CardBody className="space-y-2.5">
-            {DOCUMENT_CHECKLIST.filter((d) => d.required).filter(
-              (d) => !app.documents.find((ud) => ud.docId === d.id)?.uploaded
-            ).slice(0, 4).map((doc) => (
-              <div key={doc.id} className="flex items-start gap-2 text-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                <span className="text-slate-600">Upload {doc.name}</span>
-              </div>
-            ))}
+            {DOCUMENT_CHECKLIST.filter((d) => d.required)
+              .filter((d) => !app.documents.find((ud) => ud.docId === d.id)?.uploaded)
+              .slice(0, 4)
+              .map((doc) => (
+                <div key={doc.id} className="flex items-start gap-2 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                  <span className="text-slate-600">Upload {doc.name}</span>
+                </div>
+              ))}
             {DOCUMENT_CHECKLIST.filter((d) => d.required).filter(
               (d) => !app.documents.find((ud) => ud.docId === d.id)?.uploaded
             ).length === 0 && (
@@ -177,11 +171,10 @@ function DocumentsTab({ app }) {
   return (
     <div className="max-w-3xl">
       <div className="mb-5">
-        <h2 className="text-base font-semibold text-slate-800">Document Checklist</h2>
+        <h2 className="section-heading">Document Checklist</h2>
         <p className="text-sm text-slate-500 mt-0.5">Upload all required documents to improve your readiness score. Accepted formats: PDF, DOC, DOCX.</p>
       </div>
 
-      {/* Bulk upload placeholder */}
       <div className="mb-6 border-2 border-dashed border-slate-300 rounded-xl px-6 py-8 text-center hover:border-brand-400 hover:bg-brand-50 transition-colors cursor-pointer group">
         <div className="w-12 h-12 rounded-full bg-slate-100 group-hover:bg-brand-100 flex items-center justify-center mx-auto mb-3 transition-colors">
           <UploadCloudIcon className="w-6 h-6 text-slate-400 group-hover:text-brand-600" />
@@ -212,7 +205,7 @@ function TimelineTab({ app }) {
 
   return (
     <div className="max-w-xl">
-      <h2 className="text-base font-semibold text-slate-800 mb-6">Application Timeline</h2>
+      <h2 className="section-heading mb-6">Application Timeline</h2>
       <ol className="relative border-l border-slate-200 space-y-8 ml-3">
         {events.map((ev, i) => (
           <li key={i} className="ml-6">

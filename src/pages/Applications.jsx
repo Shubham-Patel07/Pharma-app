@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PlusIcon } from '../components/icons/PlusIcon'
+import { SearchIcon } from '../components/icons/SearchIcon'
 import { TopBar } from '../components/layout/TopBar'
 import { Button } from '../components/ui/Button'
 import { ApplicationCard } from '../components/ui/ApplicationCard'
@@ -21,7 +23,7 @@ export function Applications() {
   })
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="page-wrapper">
       <TopBar
         title="Applications"
         subtitle={`${MOCK_APPLICATIONS.length} total applications`}
@@ -32,7 +34,7 @@ export function Applications() {
           </Button>
         }
       />
-      <main className="flex-1 px-8 py-6 space-y-5">
+      <main className="page-content-sm space-y-5">
         {/* Search + filter */}
         <div className="flex items-center gap-3 flex-wrap">
           <div className="relative flex-1 min-w-60">
@@ -42,7 +44,7 @@ export function Applications() {
               placeholder="Search by product or manufacturer…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="form-control pl-9"
             />
           </div>
           <div className="flex items-center gap-1.5">
@@ -83,18 +85,3 @@ export function Applications() {
   )
 }
 
-function PlusIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-  )
-}
-
-function SearchIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-    </svg>
-  )
-}
