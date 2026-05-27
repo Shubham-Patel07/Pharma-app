@@ -193,6 +193,16 @@ Filter options are sourced from `STATUS_LABELS` in `mockData.js`. The search ico
 
 Each icon lives in its own file under `src/components/icons/`. Import directly from the file — there is no barrel `index.jsx`.
 
+### `CheckIcon`
+**Location:** `src/components/icons/CheckIcon.jsx`
+
+Checkmark (tick). Used in `CreateApplication` success state and `DocumentChecklist` uploaded-document indicator.
+
+### `InfoIcon`
+**Location:** `src/components/icons/InfoIcon.jsx`
+
+Circular info symbol. Used in the `CreateApplication` info banner.
+
 ### `PlusIcon`
 **Location:** `src/components/icons/PlusIcon.jsx`
 
