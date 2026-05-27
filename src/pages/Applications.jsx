@@ -5,9 +5,8 @@ import { SearchIcon } from '../components/icons/SearchIcon'
 import { TopBar } from '../components/layout/TopBar'
 import { Button } from '../components/ui/Button'
 import { ApplicationCard } from '../components/ui/ApplicationCard'
-import { MOCK_APPLICATIONS, STATUS_LABELS } from '../data/mockData'
-
-const FILTER_OPTIONS = ['all', 'draft', 'in_review', 'submitted', 'approved', 'rejected']
+import { SearchFilter } from '../components/ui/SearchFilter'
+import { MOCK_APPLICATIONS } from '../data/mockData'
 
 export function Applications() {
   const navigate = useNavigate()
@@ -35,34 +34,12 @@ export function Applications() {
         }
       />
       <main className="page-content-sm space-y-5">
-        {/* Search + filter */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="relative flex-1 min-w-60">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search by product or manufacturer…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="form-control pl-9"
-            />
-          </div>
-          <div className="flex items-center gap-1.5">
-            {FILTER_OPTIONS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
-                  filter === f
-                    ? 'bg-brand-600 text-white'
-                    : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                {f === 'all' ? 'All' : STATUS_LABELS[f]?.label ?? f}
-              </button>
-            ))}
-          </div>
-        </div>
+        <SearchFilter
+          search={search}
+          onSearchChange={setSearch}
+          filter={filter}
+          onFilterChange={setFilter}
+        />
 
         {/* Grid */}
         {filtered.length > 0 ? (

@@ -57,7 +57,7 @@ General-purpose button. Composes `.btn` base class with variant and size modifie
 
 ---
 
-### `Card` · `CardHeader` · `CardBody`
+### `Card` · `CardHeader` · `CardBody` · `CardRow`
 **Location:** `src/components/ui/Card.jsx`
 **Styles:** `src/styles/cards.css`
 
@@ -66,6 +66,7 @@ White panel with rounded corners and a subtle border.
 - **`Card`** — outer container. Pass `onClick` to get `.card-interactive` (hover shadow + border tint). Pass `className` for layout overrides.
 - **`CardHeader`** — `px-6 py-4` section with a bottom border; intended for `<h2 className="card-heading">` titles.
 - **`CardBody`** — `px-6 py-4` content area; pass `className` to add `space-y-*` or other layout utilities.
+- **`CardRow`** — label/value pair used inside a two-column grid inside `CardBody`. Renders a small uppercase label and a medium-weight value below it. Accepts `label` (`string`) and `value` (`string | ReactNode`).
 
 ---
 
@@ -138,6 +139,81 @@ Form primitives designed to compose together:
 Full document checklist for an application's detail page. Groups all 12 documents from `DOCUMENT_CHECKLIST` (in `mockData.js`) by category, showing upload status for each. Uploaded items show green background + filename. Missing items show an inline **Upload** `<label>` that triggers a hidden file input (placeholder — no backend connected).
 
 Accepts a `documents` prop: the `documents` array from an application object.
+
+---
+
+### `TabBar`
+**Location:** `src/components/ui/TabBar.jsx`
+
+Horizontal tab strip with an active indicator underline. Fully controlled — owns no state.
+
+| Prop | Type | Description |
+|---|---|---|
+| `tabs` | `{ id: string, label: string }[]` | Tab definitions |
+| `activeTab` | `string` | ID of the currently active tab |
+| `onTabChange` | `fn(id)` | Called with the tab ID on click |
+
+---
+
+### `ApplicationTimeline`
+**Location:** `src/components/ui/ApplicationTimeline.jsx`
+
+Vertical timeline showing lifecycle events for a single application. Events are derived from the `app` object: always shows Created and Last Updated; conditionally adds Submitted, Approved, or Rejected events based on `app.status`. Dot colors: blue for submit, green for approve, red for reject, brand for all others.
+
+Accepts a single `app` prop (shape defined in `src/data/mockData.js`).
+
+---
+
+### `DocumentUpload`
+**Location:** `src/components/ui/DocumentUpload.jsx`
+
+Dashed dropzone placeholder for bulk file uploads. Renders a styled drop target with `UploadCloudIcon` and instructional text. No state or upload logic — placeholder only.
+
+No props required.
+
+---
+
+### `SearchFilter`
+**Location:** `src/components/ui/SearchFilter.jsx`
+
+Combined search input and status filter bar used on the Applications page. Manages no state internally — fully controlled via props.
+
+| Prop | Type | Description |
+|---|---|---|
+| `search` | `string` | Current search input value |
+| `onSearchChange` | `fn(value)` | Called with the new string on every keystroke |
+| `filter` | `string` | Active filter key (`'all'` or a status slug) |
+| `onFilterChange` | `fn(key)` | Called with the selected filter key on button click |
+
+Filter options are sourced from `STATUS_LABELS` in `mockData.js`. The search icon comes from `SearchIcon`.
+
+---
+
+## Icons
+
+Each icon lives in its own file under `src/components/icons/`. Import directly from the file — there is no barrel `index.jsx`.
+
+### `PlusIcon`
+**Location:** `src/components/icons/PlusIcon.jsx`
+
+Plus / add symbol. Used in `Sidebar` (New Application nav item), `Dashboard` (New Application button), and `Applications` (TopBar action button).
+
+### `SearchIcon`
+**Location:** `src/components/icons/SearchIcon.jsx`
+
+Magnifying glass. Used in `SearchFilter` (input adornment and empty-state illustration).
+
+### `UploadCloudIcon`
+**Location:** `src/components/icons/UploadCloudIcon.jsx`
+
+Cloud with upward arrow. Used in `DocumentUpload` dropzone.
+
+### `UploadIcon`
+**Location:** `src/components/icons/UploadIcon.jsx`
+
+Small tray-style upload icon. Used in the inline Upload button inside `DocumentChecklist`.
+
+All icons accept a single `className` prop for Tailwind sizing (e.g. `className="w-4 h-4"`).
 
 ---
 
