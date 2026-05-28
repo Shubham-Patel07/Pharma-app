@@ -5,6 +5,7 @@ import { Button } from '../components/ui/Button'
 import { Card, CardHeader, CardBody } from '../components/ui/Card'
 import { FormField, Input, Select } from '../components/ui/FormField'
 import { DOSAGE_FORMS } from '../data/mockData'
+import { DMLA_LICENSE_TYPES, DRUG_SCHEDULES, GUJARAT_DISTRICTS } from '../data/dmlaData'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { InfoBanner } from '../components/ui/InfoBanner'
 import { useApplicationForm } from '../hooks/useApplicationForm'
@@ -45,7 +46,7 @@ export function CreateApplication() {
     <div className="page-wrapper">
       <TopBar
         title="New Application"
-        subtitle="Fill in the product details to start a regulatory filing"
+        subtitle="Fill in the product details to start a Gujarat DMLA filing"
         actions={
           <Button variant="secondary" onClick={() => navigate(-1)}>
             Cancel
@@ -63,7 +64,7 @@ export function CreateApplication() {
               <CardBody className="space-y-5">
                 <FormField label="Product Name" required error={errors.productName}>
                   <Input
-                    placeholder="e.g. Metformin HCl"
+                    placeholder="e.g. Paracetamol IP"
                     value={form.productName}
                     onChange={set('productName')}
                   />
@@ -103,7 +104,7 @@ export function CreateApplication() {
 
                   <FormField label="Pack Size" required error={errors.packSize}>
                     <Input
-                      placeholder="e.g. 100 tablets/bottle"
+                      placeholder="e.g. 10 tablets/strip"
                       value={form.packSize}
                       onChange={set('packSize')}
                     />
@@ -112,7 +113,7 @@ export function CreateApplication() {
               </CardBody>
             </Card>
 
-            {/* Manufacturing */}
+            {/* Manufacturing & Regulatory */}
             <Card>
               <CardHeader>
                 <h2 className="card-heading">Manufacturing & Regulatory</h2>
@@ -120,39 +121,83 @@ export function CreateApplication() {
               <CardBody className="space-y-5">
                 <FormField label="Manufacturer Name" required error={errors.manufacturerName}>
                   <Input
-                    placeholder="e.g. BioGen Pharmaceuticals Ltd."
+                    placeholder="e.g. Gujarat Pharma Industries Pvt. Ltd."
                     value={form.manufacturerName}
                     onChange={set('manufacturerName')}
                   />
                 </FormField>
 
+                <FormField label="Submission Type" required error={errors.submissionType}>
+                  <Select value={form.submissionType} onChange={set('submissionType')}>
+                    <option value="">Select form…</option>
+                    {DMLA_LICENSE_TYPES.map((t) => (
+                      <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                  </Select>
+                </FormField>
+              </CardBody>
+            </Card>
+
+            {/* Gujarat DMLA Details */}
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <h2 className="card-heading">Gujarat DMLA Details</h2>
+                  <span className="text-xs font-medium px-2 py-0.5 bg-brand-50 text-brand-700 rounded border border-brand-200">iDMLA Portal</span>
+                </div>
+              </CardHeader>
+              <CardBody className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
-                  <FormField label="Submission Type" required error={errors.submissionType}>
-                    <Select value={form.submissionType} onChange={set('submissionType')}>
-                      <option value="">Select type…</option>
-                      <option value="ANDA">ANDA (Generic)</option>
-                      <option value="NDA">NDA (New Drug)</option>
-                      <option value="BLA">BLA (Biologics)</option>
-                      <option value="505(b)(2)">505(b)(2)</option>
+                  <FormField label="License Type" required error={errors.licenseType}>
+                    <Select value={form.licenseType} onChange={set('licenseType')}>
+                      <option value="">Select form…</option>
+                      {DMLA_LICENSE_TYPES.map((t) => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                      ))}
                     </Select>
                   </FormField>
 
-                  <FormField label="Target Market" required error={errors.targetMarket}>
-                    <Select value={form.targetMarket} onChange={set('targetMarket')}>
-                      <option value="">Select market…</option>
-                      <option value="US FDA">US FDA</option>
-                      <option value="EU EMA">EU EMA</option>
-                      <option value="UK MHRA">UK MHRA</option>
-                      <option value="Health Canada">Health Canada</option>
-                      <option value="TGA Australia">TGA Australia</option>
+                  <FormField label="Drug Schedule" required error={errors.drugSchedule}>
+                    <Select value={form.drugSchedule} onChange={set('drugSchedule')}>
+                      <option value="">Select schedule…</option>
+                      {DRUG_SCHEDULES.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
                     </Select>
                   </FormField>
                 </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField label="District (Gujarat)" required error={errors.district}>
+                    <Select value={form.district} onChange={set('district')}>
+                      <option value="">Select district…</option>
+                      {GUJARAT_DISTRICTS.map((d) => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </Select>
+                  </FormField>
+
+                  <FormField label="Competent Person Name" required error={errors.competentPersonName}>
+                    <Input
+                      placeholder="e.g. Dr. Rajesh Patel (B.Pharm)"
+                      value={form.competentPersonName}
+                      onChange={set('competentPersonName')}
+                    />
+                  </FormField>
+                </div>
+
+                <FormField label="Manufacturing Address" required error={errors.manufacturingAddress}>
+                  <Input
+                    placeholder="e.g. 42, GIDC Estate, Phase II, Naroda, Ahmedabad - 382330"
+                    value={form.manufacturingAddress}
+                    onChange={set('manufacturingAddress')}
+                  />
+                </FormField>
               </CardBody>
             </Card>
 
             <InfoBanner>
-              After creation, you'll be taken to the application page where you can upload required documents and track your readiness score.
+              After creation, you'll be taken to the application page where you can upload required documents and track your DMLA filing readiness score.
             </InfoBanner>
 
             <div className="flex gap-3 pt-2">

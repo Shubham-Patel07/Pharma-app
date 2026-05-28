@@ -30,7 +30,7 @@ export function Dashboard() {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard label="Total Applications" value={STATS.totalApplications} sub="All time" />
-          <StatCard label="Submitted" value={STATS.submitted} sub="Pending FDA review" colorClass="text-blue-600" />
+          <StatCard label="Submitted" value={STATS.submitted} sub="Pending DMLA review" colorClass="text-blue-600" />
           <StatCard label="Approved" value={STATS.approved} sub="Successfully cleared" colorClass="text-emerald-600" />
           <StatCard label="Avg Readiness" value={`${STATS.avgReadiness}%`} sub="Across all drafts" colorClass="text-brand-600" />
         </div>
@@ -60,7 +60,7 @@ export function Dashboard() {
             <QuickAction
               icon={<PlusIcon className="w-5 h-5" />}
               title="Start New Filing"
-              desc="Create an ANDA or NDA application"
+              desc="Create a Gujarat DMLA application"
               color="bg-brand-50 text-brand-600"
               onClick={() => navigate('/applications/new')}
             />

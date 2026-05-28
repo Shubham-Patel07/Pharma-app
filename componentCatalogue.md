@@ -188,6 +188,17 @@ No props required.
 
 ---
 
+### `InfoBanner`
+**Location:** `src/components/ui/InfoBanner.jsx`
+
+Blue-tinted info callout strip with an `InfoIcon` on the left. Pass the message as `children`.
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `ReactNode` | Banner message text |
+
+---
+
 ### `SearchFilter`
 **Location:** `src/components/ui/SearchFilter.jsx`
 
@@ -226,7 +237,7 @@ Folder symbol. Used in the `Dashboard` Quick Actions tile for "Upload Documents"
 ### `InfoIcon`
 **Location:** `src/components/icons/InfoIcon.jsx`
 
-Circular info symbol. Used in the `CreateApplication` info banner.
+Circular info symbol. Used inside `InfoBanner`.
 
 ### `PlusIcon`
 **Location:** `src/components/icons/PlusIcon.jsx`
@@ -249,6 +260,83 @@ Cloud with upward arrow. Used in `DocumentUpload` dropzone.
 Small tray-style upload icon. Used in the inline Upload button inside `DocumentChecklist`.
 
 All icons accept a single `className` prop for Tailwind sizing (e.g. `className="w-4 h-4"`).
+
+---
+
+## Hooks
+
+All hooks live in `src/hooks/`. Files that don't use React state/effects are pure helpers but are co-located here for discoverability.
+
+### `useApplicationForm`
+**Location:** `src/hooks/useApplicationForm.js`
+
+Owns all state and logic for the Create Application form.
+
+| Return | Type | Description |
+|---|---|---|
+| `form` | `object` | Current field values |
+| `errors` | `object` | Validation error messages keyed by field name |
+| `submitted` | `boolean` | True after a successful submit |
+| `set(field)` | `fn(e)` | Returns an onChange handler for the given field |
+| `handleSubmit` | `fn(e)` | Validates and sets `submitted`; sets `errors` on failure |
+| `reset` | `fn()` | Resets form, errors, and submitted state |
+
+---
+
+### `useDocumentProgress`
+**Location:** `src/hooks/useDocumentProgress.js`
+
+Computes upload counts for an application's document set.
+
+| Return | Type | Description |
+|---|---|---|
+| `totalRequired` | `number` | Count of required docs in `DOCUMENT_CHECKLIST` |
+| `uploadedRequired` | `number` | Count of required docs that are uploaded |
+| `totalUploaded` | `number` | Count of all uploaded docs across the application |
+
+Accepts a single `app` prop. Internally uses `isDocUploaded` from `documentHelpers`.
+
+---
+
+### `useFilteredApplications`
+**Location:** `src/hooks/useFilteredApplications.js`
+
+Owns the search and status-filter state for the Applications list.
+
+| Return | Type | Description |
+|---|---|---|
+| `search` | `string` | Current search string |
+| `setSearch` | `fn(string)` | Update search |
+| `filter` | `string` | Active status filter (`'all'` or a status slug) |
+| `setFilter` | `fn(string)` | Update filter |
+| `filtered` | `app[]` | Applications matching both search and filter |
+
+---
+
+### `documentHelpers`
+**Location:** `src/hooks/documentHelpers.js`
+
+Pure utility functions for document upload lookups. Not a hook — no React state.
+
+- **`isDocUploaded(documents, docId)`** — returns `true` if the doc with `docId` is uploaded in the `documents` array.
+- **`getMissingRequiredDocs(documents)`** — returns all required `DOCUMENT_CHECKLIST` entries that are not yet uploaded.
+
+---
+
+## Data
+
+### `mockData.js`
+**Location:** `src/data/mockData.js`
+
+Primary static data source. Exports `MOCK_APPLICATIONS`, `DOCUMENT_CHECKLIST`, `STATUS_LABELS`, `DOSAGE_FORMS`, and `STATS`.
+
+### `formData.js`
+**Location:** `src/data/formData.js`
+
+Static configuration for the Create Application form.
+
+- **`INITIAL_FORM`** — default empty values for every field.
+- **`REQUIRED_FIELDS`** — array of field keys that must be non-empty to pass validation.
 
 ---
 

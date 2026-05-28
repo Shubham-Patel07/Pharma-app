@@ -5,8 +5,13 @@ export const INITIAL_FORM = {
   packSize: '',
   manufacturerName: '',
   submissionType: '',
-  targetMarket: '',
+  targetMarket: 'Gujarat DMLA',
   route: '',
+  licenseType: '',
+  manufacturingAddress: '',
+  district: '',
+  drugSchedule: '',
+  competentPersonName: '',
 }
 
 export const REQUIRED_FIELDS = [
@@ -16,5 +21,9 @@ export const REQUIRED_FIELDS = [
   'packSize',
   'manufacturerName',
   'submissionType',
-  'targetMarket',
+  'licenseType',
+  'manufacturingAddress',
+  'district',
+  'drugSchedule',
+  'competentPersonName',
 ]

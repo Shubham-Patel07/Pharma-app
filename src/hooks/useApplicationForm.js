@@ -11,7 +11,7 @@ export function useApplicationForm() {
   function validate() {
     const errs = {}
     REQUIRED_FIELDS.forEach((f) => {
-      if (!form[f].trim()) errs[f] = 'This field is required'
+      if (!form[f]?.trim()) errs[f] = 'This field is required'
     })
     return errs
   }
