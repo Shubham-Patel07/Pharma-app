@@ -21,7 +21,6 @@ export const REQUIRED_FIELDS = [
   'packSize',
   'manufacturerName',
   'submissionType',
-  'licenseType',
   'manufacturingAddress',
   'district',
   'drugSchedule',

@@ -66,7 +66,6 @@ export const DMLA_FIELD_MAP = {
   packSize: { portalLabel: 'Pack Size / Presentation', required: true },
   manufacturerName: { portalLabel: 'Name of Licensee / Applicant Firm', required: true },
   submissionType: { portalLabel: 'Application Category (Form Type)', required: true },
-  licenseType: { portalLabel: 'License Type', required: true },
   drugSchedule: { portalLabel: 'Drug Schedule Category', required: true },
   district: { portalLabel: 'District (Gujarat)', required: true },
   manufacturingAddress: { portalLabel: 'Address of Manufacturing Premises', required: true },

@@ -8,6 +8,11 @@ export function useApplicationForm() {
 
   const set = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
 
+  function setSubmissionType(e) {
+    const value = e.target.value
+    setForm((prev) => ({ ...prev, submissionType: value, licenseType: value }))
+  }
+
   function validate() {
     const errs = {}
     REQUIRED_FIELDS.forEach((f) => {
@@ -32,5 +37,5 @@ export function useApplicationForm() {
     setSubmitted(false)
   }
 
-  return { form, errors, submitted, set, handleSubmit, reset }
+  return { form, errors, submitted, set, setSubmissionType, handleSubmit, reset }
 }

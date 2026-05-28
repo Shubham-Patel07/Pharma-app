@@ -5,7 +5,6 @@ import { Dashboard } from './pages/Dashboard'
 import { Applications } from './pages/Applications'
 import { CreateApplication } from './pages/CreateApplication'
 import { ApplicationDetails } from './pages/ApplicationDetails'
-import { Filing } from './pages/Filing'
 import { Placeholder } from './pages/Placeholder'
 
 export default function App() {
@@ -16,8 +15,7 @@ export default function App() {
         <Route path="/applications" element={<Applications />} />
         <Route path="/applications/new" element={<CreateApplication />} />
         <Route path="/applications/:id" element={<ApplicationDetails />} />
-        <Route path="/filing" element={<Filing />} />
-        <Route path="/documents" element={<Placeholder title="Document Library" subtitle="Centralised document storage coming soon" />} />
+<Route path="/documents" element={<Placeholder title="Document Library" subtitle="Centralised document storage coming soon" />} />
         <Route path="/analytics" element={<Placeholder title="Analytics" subtitle="Submission pipeline analytics coming soon" />} />
         <Route path="/settings" element={<Placeholder title="Settings" subtitle="Account and workspace settings coming soon" />} />
       </Route>

@@ -12,7 +12,7 @@ import { useApplicationForm } from '../hooks/useApplicationForm'
 
 export function CreateApplication() {
   const navigate = useNavigate()
-  const { form, errors, submitted, set, handleSubmit, reset } = useApplicationForm()
+  const { form, errors, submitted, set, setSubmissionType, handleSubmit, reset } = useApplicationForm()
 
   if (submitted) {
     return (
@@ -128,7 +128,7 @@ export function CreateApplication() {
                 </FormField>
 
                 <FormField label="Submission Type" required error={errors.submissionType}>
-                  <Select value={form.submissionType} onChange={set('submissionType')}>
+                  <Select value={form.submissionType} onChange={setSubmissionType}>
                     <option value="">Select form…</option>
                     {DMLA_LICENSE_TYPES.map((t) => (
                       <option key={t.value} value={t.value}>{t.label}</option>
@@ -147,25 +147,14 @@ export function CreateApplication() {
                 </div>
               </CardHeader>
               <CardBody className="space-y-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField label="License Type" required error={errors.licenseType}>
-                    <Select value={form.licenseType} onChange={set('licenseType')}>
-                      <option value="">Select form…</option>
-                      {DMLA_LICENSE_TYPES.map((t) => (
-                        <option key={t.value} value={t.value}>{t.label}</option>
-                      ))}
-                    </Select>
-                  </FormField>
-
-                  <FormField label="Drug Schedule" required error={errors.drugSchedule}>
-                    <Select value={form.drugSchedule} onChange={set('drugSchedule')}>
-                      <option value="">Select schedule…</option>
-                      {DRUG_SCHEDULES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </Select>
-                  </FormField>
-                </div>
+                <FormField label="Drug Schedule" required error={errors.drugSchedule}>
+                  <Select value={form.drugSchedule} onChange={set('drugSchedule')}>
+                    <option value="">Select schedule…</option>
+                    {DRUG_SCHEDULES.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </Select>
+                </FormField>
 
                 <div className="grid grid-cols-2 gap-4">
                   <FormField label="District (Gujarat)" required error={errors.district}>
